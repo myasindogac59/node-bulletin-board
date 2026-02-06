@@ -12,7 +12,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 sh '''
-                docker build -t bulletin-board:${BUILD_NUMBER} bulletin-board-app .
+                docker build -t bulletin-board:${BUILD_NUMBER} bulletin-board-app
                 '''
             }
         }
@@ -22,7 +22,8 @@ pipeline {
                 docker rm -f bulletin-board || true
                 docker run -d \
                 -p 3000:8080 \
-                --name bulletin-board:7
+                --name bulletin-board \
+                bulletin-board
                 '''
             }
         }
