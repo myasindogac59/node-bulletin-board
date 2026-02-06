@@ -1,0 +1,7 @@
+services:
+  app:
+    image: bulletin-board:${BUILD_NUMBER}
+    container_name:  bulletin-board
+    ports:
+      - "3000:8080"
+    restart: always

@@ -1,31 +1,25 @@
 pipeline {
     agent any
-    stages {
-        stage('Test Workspace') {
+    stages{
+        stage('Checkout') {
             steps {
-                sh '''
-                pwd
-                ls -la
-                '''
+                checkout scm
             }
         }
         stage('Docker Build') {
             steps {
                 sh '''
-                docker build -t bulletin-board:${BUILD_NUMBER} bulletin-board-app
+                docker build \
+                -t bulletin-board:${BUILD_NUMBER} \
+                bulletin-board-app
                 '''
             }
         }
-        stage('Docker  Deploy') {
+        stage('Docker Compose Deploy') {
             steps {
                 sh '''
-                echo "Eski Container Siliniyor "
-                docker rm -f bulletin-board || true
-                echo "Yeni Container Ayağa KAldırılıyor"
-                docker run -d \
-                -p 3000:8080 \
-                --name bulletin-board \
-                bulletin-board:${BUILD_NUMBER}
+                docker compose down || true
+                docker compose up -d
                 '''
             }
         }
