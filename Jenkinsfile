@@ -23,7 +23,7 @@ pipeline {
                 docker run -d \
                 -p 3000:8080 \
                 --name bulletin-board \
-                bulletin-board
+                bulletin-board:${BUILD_NUMBER}
                 '''
             }
         }
