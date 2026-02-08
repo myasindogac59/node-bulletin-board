@@ -7,7 +7,7 @@ var express        = require('express'),
     api            = require('./backend/api');
 
 var app = module.exports = express();
-
+const PORT = process.env.PORT || 8080;
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(morgan('dev'));
@@ -34,5 +34,5 @@ app.get('/api/events', api.events);
 app.post('/api/events', api.event);
 app.delete('/api/events/:eventId', api.event);
 
-app.listen(8080);
+app.listen(PORT);
 console.log('Magic happens on port 8080...');

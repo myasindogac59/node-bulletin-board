@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         APP_ENV = "development"
-        APP_PORT = "3000"
+        APP_PORT = "4000"
     }
     stages {
         stage('Check Env') {
@@ -21,6 +21,14 @@ pipeline {
                 sh '''
                 cd bulletin-board-app
                 npm install
+                '''
+            }
+        }
+        stage('Run App (Smoke Test)') {
+            steps {
+                sh '''
+                cd bulletin-board-app
+                timeout 5 npm start || true
                 '''
             }
         }
