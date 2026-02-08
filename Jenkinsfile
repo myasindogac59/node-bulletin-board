@@ -40,5 +40,19 @@ pipeline {
                 '''
             }
         }
+        stage {
+            steps {
+                sh '''
+                echo "Stopping and removing any existing container..."
+                docker rm -f bulletin-board-app || true
+                echo "Running new container..."
+                docker run  -d \
+                    -p 4000:4000 \
+                    -e APP_ENV=development \
+                    -e APP_PORT=4000 \
+                    bulletin-board-app:latest
+                    '''
+            }
+        }
     }
 }
