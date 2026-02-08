@@ -40,7 +40,7 @@ pipeline {
                 '''
             }
         }
-        stage {
+        stage('Run Docker Container') {
             steps {
                 sh '''
                 echo "Stopping and removing any existing container..."
