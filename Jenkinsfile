@@ -22,5 +22,13 @@ pipeline {
                 '''
             }
         }
+        stage('Build Docker Image') {
+            steps {
+                sh '''
+                cd bulletin-board-app
+                docker build -t bulletin-board-app:latest .
+                '''
+            }
+        }
     }
 }
