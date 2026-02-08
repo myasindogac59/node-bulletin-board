@@ -9,7 +9,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh '''
-                cd bulletin-boards-app
+                cd bulletin-board-app
                 npm install
                 '''
             }
