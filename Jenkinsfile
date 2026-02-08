@@ -1,9 +1,9 @@
 pipeline {
     agent any
     environment {
-        APP_ENV = "development"
-        APP_PORT = "4000"
-    }
+            APP_ENV = credentials('APP_ENV')
+            APP_PORT = credentials('APP_PORT')
+        }
     stages {
         stage('Check Env') {
             steps {
@@ -40,10 +40,7 @@ pipeline {
                 '''
             }
         }
-        environment {
-            APP_ENV = credentials('APP_ENV')
-            APP_PORT = credentials('APP_PORT')
-        }
+
         stage('Run Docker Container') {
             steps {
                 sh '''
