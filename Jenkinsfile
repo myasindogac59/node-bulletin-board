@@ -40,6 +40,10 @@ pipeline {
                 '''
             }
         }
+        environment {
+            APP_ENV = credentials('APP_ENV')
+            APP_PORT = credentials('APP_PORT')
+        }
         stage('Run Docker Container') {
             steps {
                 sh '''
@@ -47,9 +51,9 @@ pipeline {
                 docker rm -f bulletin-board || true
                 echo "Running new container..."
                 docker run  -d \
-                    -p 4000:4000 \
-                    -e APP_ENV=development \
-                    -e APP_PORT=4000 \
+                    -p ${APP_PORT}:${APP_PORT} \
+                    -e APP_ENV= ${APP_ENV} \
+                    -e APP_PORT= ${APP_PORT} \
                     bulletin-board-app:latest
                     '''
             }
