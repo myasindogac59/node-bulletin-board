@@ -44,7 +44,7 @@ pipeline {
             steps {
                 sh '''
                 echo "Stopping and removing any existing container..."
-                docker rm -f bulletin-board-app || true
+                docker rm -f bulletin-board || true
                 echo "Running new container..."
                 docker run  -d \
                     -p 4000:4000 \
