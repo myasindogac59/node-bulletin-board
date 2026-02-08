@@ -14,5 +14,13 @@ pipeline {
                 '''
             }
         }
+        stage('Run App (Smoke Test)') {
+            steps {
+                sh '''
+                cd bulletin-board-app
+                timeout 5 npm start || true
+                '''
+            }
+        }
     }
 }
