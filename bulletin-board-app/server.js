@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(express.static(__dirname + '/'));
 app.use('/build', express.static('public'));
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.APP_PORT || 8080;
 
 var env = process.env.NODE_ENV;
 if ('development' == env) {
