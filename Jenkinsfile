@@ -6,13 +6,14 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Workspace Kontrol') {
+        stage('Node Control') {
             steps {
                 sh '''
-                echo "Bulunduğum Dizin:"
-                pwd
-                echo "Dosyalar:"
-                ls -la
+                echo "Node vversiyonu:"
+                node -v || echo "Node Yok"
+                
+                echo "npm versiyonu:"
+                npm -v || echo || "npm yok"
                 '''
             }
         }
