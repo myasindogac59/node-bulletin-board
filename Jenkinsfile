@@ -50,9 +50,10 @@ pipeline {
                 docker rm -f bulletin-board || true
                 echo "Running new container..."
                 docker run  -d \
-                    -p APP_PORT:$APP_PORT \
-                    -e APP_ENV= $APP_ENV \
-                    -e APP_PORT= $APP_PORT \
+                    --name bulletin-board-app \
+                    -p $APP_PORT:$APP_PORT \
+                    -e APP_ENV=$APP_ENV \
+                    -e APP_PORT=$APP_PORT \
                     bulletin-board-app:latest
                     '''
             }
