@@ -56,6 +56,7 @@ pipeline {
                     -e APP_PORT=$APP_PORT \
                     bulletin-board-app:latest
                     '''
+
             }
         }
     }
