@@ -7,8 +7,10 @@ pipeline {
     stages {
         stage('Check Env') {
             steps {
+                sh'''
                 echo "Environment: $APP_ENV"
                 echo "Port: $APP_PORT"
+                '''
             }
         }
         stage('Checkout') {
