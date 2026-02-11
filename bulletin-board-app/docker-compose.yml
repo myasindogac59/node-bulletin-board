@@ -1,0 +1,10 @@
+services:
+  app:
+    image: bulletin-board-app:latest
+    container_name: bulletin-board-app
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    environment:
+      APP_ENV: ${APP_ENV}
+      APP_PORT: ${APP_PORT}
+    restart: unless-stopped
