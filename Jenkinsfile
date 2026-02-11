@@ -39,7 +39,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    IMAGE_TAG = "env.BUILD_NUMBER"
+                    def IMAGE_TAG = "${env.BUILD_NUMBER}"
+                    env.IMAGE_TAG = IMAGE_TAG
                 }
                 sh '''
                 cd bulletin-board-app
