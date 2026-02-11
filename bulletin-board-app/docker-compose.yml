@@ -1,6 +1,6 @@
 services:
   app:
-    image: yasindogac5959/bulletin-board-app:${BUILD_NUMBER}
+    image: yasindogac5959/bulletin-board:${BUILD_NUMBER}
     container_name: bulletin-board-app
     ports:
       - "${APP_PORT}:${APP_PORT}"

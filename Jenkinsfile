@@ -64,7 +64,7 @@ pipeline {
             steps {
                 sh '''
                 cd bulletin-board-app
-                docker rm -rf bulletin-board-app || true
+                docker rm -f bulletin-board-app || true
                 docker compose down  || true
                 docker compose up -d
                 '''
