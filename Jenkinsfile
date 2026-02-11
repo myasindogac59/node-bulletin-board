@@ -64,14 +64,14 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh '''
-                #!/bin/bash
+                sh """
                 set -e
                 cd bulletin-board-app
-                export BUILD_NUMBER=${env.BUILD_NUMBER}
+                echo "Deploying version: ${IMAGE_TAG}"
+                export IMAGE_TAG=${IMAGE_TAG}
                 docker compose down  || true
                 docker compose up -d
-                '''
+                """
             }
         }
     }
