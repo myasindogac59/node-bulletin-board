@@ -38,22 +38,23 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
+                script {
+                    IMAGE_TAG = "env.BUILD_NUMBER"
+                }
                 sh '''
                 cd bulletin-board-app
-                docker build -t $IMAGE_NAME:$IMAGE_TAG .
+                docker build -t yasindogac5959/bulletin-board:${IMAGE_TAG} .
+                docker tag yasindogac5959/bulletin-board:${IMAGE_TAG}  yasindogac5959/bulletin-board:latest
                 '''
             }
         }
         stage('Push to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub-creds',
-                    usernameVariable: 'DOCKER_USER',
-                    passwordVariable: 'DOCKER_PASS'
-                )]) {
+                withCredentials([string(credentialsId: 'DOCKER_PASS', variable: 'DOCKER_PASS')]) {
                     sh '''
-                    echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                    docker push $IMAGE_NAME:$IMAGE_TAG
+                    echo \$DOCKER_PASS | docker login -u yasindogac5959 --password-stdin
+                    docker push yasindogac5959/bulletin-board:${IMAGE_TAG}
+                    docker push yasindogac5959/bulletin-board:latest
                     docker logout
                     '''
                 }
@@ -64,7 +65,7 @@ pipeline {
             steps {
                 sh '''
                 cd bulletin-board-app
-                docker rm -f bulletin-board-app || true
+                export BUILD_NUMBER=${env.BUILD_NUMBER}
                 docker compose down  || true
                 docker compose up -d
                 '''
