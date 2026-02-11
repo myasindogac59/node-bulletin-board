@@ -43,20 +43,15 @@ pipeline {
             }
         }
 
-        stage('Run Docker Container') {
+        stage('Deploy with Docker Compose') {
             steps {
                 sh '''
-                echo "Stopping and removing any existing container..."
-                docker rm -f bulletin-board-app || true
-                echo "Running new container..."
-                docker run  -d \
-                    --name bulletin-board-app \
-                    -p $APP_PORT:$APP_PORT \
-                    -e APP_ENV=$APP_ENV \
-                    -e APP_PORT=$APP_PORT \
-                    bulletin-board-app:latest
-                    '''
-
+                cd bulletin-board-app
+                echo "Stopping old containers"
+                docker-compose down || true
+                echo "Starting new containers"
+                docker compose up -d --build
+                '''
             }
         }
     }
