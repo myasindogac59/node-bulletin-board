@@ -39,6 +39,8 @@ pipeline {
             steps {
                 sh '''
                 cd bulletin-board-app
+                echo "Force removing old container if exists"
+                docker rm -f bulletin-board-app || true
                 echo "Stopping old containers"
                 docker compose down || true
                 echo "Starting new containers"
