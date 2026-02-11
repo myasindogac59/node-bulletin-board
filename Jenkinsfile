@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
                     def IMAGE_TAG = "${env.BUILD_NUMBER}"
-                    env.IMAGE_TAG = IMAGE_TAG
+                    env.IMAGE_TAG = IMAGE_TAG 
                 }
                 sh '''
                 cd bulletin-board-app
@@ -65,6 +65,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
+                #!/bin/bash
+                set -e
                 cd bulletin-board-app
                 export BUILD_NUMBER=${env.BUILD_NUMBER}
                 docker compose down  || true
